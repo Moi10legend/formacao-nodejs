@@ -1,3 +1,4 @@
+import { deletePlayerRepository } from "../repository/players-repository";
 import { PlayersList } from "../models/listPlayers-model"
 import { PlayersModel } from "../models/players-model";
 import { findAllPlayers, findPlayerById, insertPlayer } from "../repository/players-repository";
@@ -24,5 +25,15 @@ export const postPlayerService = async(player: PlayersModel) =>{
         return {statusCode: StatusCodes.created, body: {message: "Successful!"}}
     }else{
         return {statusCode: StatusCodes.badRequest, body: player}
+    }
+}
+
+export const deletePlayerByIdService = async(id: number) => {
+    const response = await deletePlayerRepository(id)
+
+    if(response == "Successful"){
+        return {statusCode: StatusCodes.ok, body: {message: response}}
+    }else{
+        return {statusCode: StatusCodes.badRequest, body: {message: response}}
     }
 }

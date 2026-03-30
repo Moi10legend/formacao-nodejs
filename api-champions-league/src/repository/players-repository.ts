@@ -43,3 +43,21 @@ export const findPlayerById = async (id:number):Promise<PlayersModel | undefined
 export const insertPlayer = async (player: PlayersModel) => {
     database.push(player)
 }
+
+export const deletePlayerRepository = async (id: number) => {
+    let index = null;
+    database.forEach((currentPlayer, i) => {
+        if(currentPlayer.id === id){
+            index = i
+        }
+    }) 
+
+    if(index != null){
+        database.splice(index)
+        return "Successful"
+    }else{
+        return "Player not found"
+    }
+    
+
+}
